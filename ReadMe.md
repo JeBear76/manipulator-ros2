@@ -1,8 +1,8 @@
 # Arduino Bot Manipulator Arm Course 
 
 ## useful URLs
-<Install Gazebo on WSL>(https://aleksandarhaber.com/how-to-install-gazebo-harmonic-in-windows-by-using-wsl-and-ubuntu-24-04-and-how-to-run-mobile-robot-simulation/)  
-<Share USB device with WSL from Windows>(https://learn.microsoft.com/en-us/windows/wsl/connect-usb)
+[Install Gazebo on WSL](https://aleksandarhaber.com/how-to-install-gazebo-harmonic-in-windows-by-using-wsl-and-ubuntu-24-04-and-how-to-run-mobile-robot-simulation/)  
+[Share USB device with WSL from Windows](https://learn.microsoft.com/en-us/windows/wsl/connect-usb)
 ## quick notes
 
 ### Creating the environment
