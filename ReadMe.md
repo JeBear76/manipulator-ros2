@@ -34,12 +34,13 @@ ros2 topic list
 ros2 topic echo <name of topic>
 ros2 topic info <name of topic> [--verbose]
 ros2 topic hz <name of topic>
+ros2 topic pub <name of topic> <message type> <body>
 ```
 
 ## Packages Description
 
 ### arduinobot_XX_examples
 Some basic tutorial and references packages in Python and C++
-#### simple_publisher.py
-
+#### simple_publisher / simple_subscriber
 This script provides a basic example of implementing a publisher in a publish-subscribe messaging system. It demonstrates how to send messages to a specific topic, enabling real-time communication with subscribers.
+
