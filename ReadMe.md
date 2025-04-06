@@ -44,6 +44,10 @@ Some basic tutorial and references packages in Python and C++
 #### simple_publisher / simple_subscriber
 This script provides a basic example of implementing a publisher in a publish-subscribe messaging system. It demonstrates how to send messages to a specific topic, enabling real-time communication with subscribers.
 
+#### simple_parameter
+This script demonstrates how to use ROS 2 parameters.  
+It includes examples of declaring parameters, setting default values, and handling parameter changes dynamically through a callback function. 
+
 ### arduinobot_description
 This package contains the Universal Robot Definition Format file of the robot and the STL files
 ```
