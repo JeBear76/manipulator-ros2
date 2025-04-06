@@ -53,3 +53,8 @@ This package contains the Universal Robot Definition Format file of the robot an
 ```
 ros2 launch urdf_tutorial display.launch.py model:=/home/jebear/arduinobot_ws/src/arduinobot_description/urdf/arduinobot.urdf.xacro
 ```
+#### Launch file command
+```
+ros2 launch arduinobot_description display_launch.py
+```
+
