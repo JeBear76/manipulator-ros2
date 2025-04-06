@@ -44,3 +44,8 @@ Some basic tutorial and references packages in Python and C++
 #### simple_publisher / simple_subscriber
 This script provides a basic example of implementing a publisher in a publish-subscribe messaging system. It demonstrates how to send messages to a specific topic, enabling real-time communication with subscribers.
 
+### arduinobot_description
+This package contains the Universal Robot Definition Format file of the robot and the STL files
+```
+ros2 launch urdf_tutorial display.launch.py model:=/home/jebear/arduinobot_ws/src/arduinobot_description/urdf/arduinobot.urdf.xacro
+```
