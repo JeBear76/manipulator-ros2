@@ -55,6 +55,6 @@ ros2 launch urdf_tutorial display.launch.py model:=/home/jebear/arduinobot_ws/sr
 ```
 #### Launch file command
 ```
-ros2 launch arduinobot_description display_launch.py
+ros2 launch arduinobot_description display.launch.py
 ```
 

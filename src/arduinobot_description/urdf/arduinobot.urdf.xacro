@@ -5,16 +5,34 @@
     <xacro:property name="effort" value="30.0" />
     <xacro:property name="velocity" value="10.0" />
 
+    <xacro:macro name="default_inertial" params="mass">
+        <inertial>
+            <mass value="${mass}" />
+            <inertia ixx="1.0" ixy="0.0" ixz="0.0"
+                iyy="1.0" iyz="0.0"
+                izz="1.0" />
+        </inertial>
+    </xacro:macro>
+
     <link name="world" />
 
     <link name="base_link">
+        <xacro:default_inertial mass="1.0" />
         <visual>
             <origin rpy="0 0 0" xyz="-0.5 -0.5 0" />
             <geometry>
                 <mesh filename="package://arduinobot_description/meshes/basement.STL"
                     scale="0.01 0.01 0.01" />
             </geometry>
+            <material name="red"/>
         </visual>
+        <collision>
+            <origin rpy="0 0 0" xyz="-0.5 -0.5 0" />
+            <geometry>
+                <mesh filename="package://arduinobot_description/meshes/basement.STL"
+                    scale="0.01 0.01 0.01" />
+            </geometry>
+        </collision>        
     </link>
 
     <joint name="virtual_joint" type="fixed">
@@ -23,14 +41,97 @@
         <origin rpy="0 0 0" xyz="0 0 0" />
     </joint>
 
+    <link name="rgb_camera ">
+        <xacro:default_inertial mass="0.01" />
+        <visual>
+            <origin rpy="${2*PI/3} ${PI} ${PI}" xyz="-0.127 0.35 0.3" />
+            <geometry>
+                <mesh filename="package://arduinobot_description/meshes/pi_camera.STL"
+                    scale="0.01 0.01 0.01" />
+            </geometry>
+            <material name="blue"/>
+        </visual>
+        <collision>
+            <origin rpy="${2*PI/3} ${PI} ${PI}" xyz="-0.127 0.35 0.3" />
+            <geometry>
+                <mesh filename="package://arduinobot_description/meshes/pi_camera.STL"
+                    scale="0.01 0.01 0.01" />
+            </geometry>
+        </collision>
+    </link>
+    
+    <gazebo reference="rgb_camera">
+        <sensor type="camera" name="rgb_camera_sensor">
+            <update_rate>30.0</update_rate>
+            <always_on>true</always_on>
+            <vizualize>true</vizualize>
+            <!-- <gz_frame_id>/rgb_camera</gz_frame_id> -->
+            <camera name="rgb_camera">
+                <horizontal_fov>1.15</horizontal_fov>
+                <vertical_fov>0.71</vertical_fov>
+                <image>
+                    <width>2304</width>
+                    <height>1296</height>
+                    <format>R8G8B8</format>
+                </image>
+                <distortion>
+                    <k1>0.0</k1>
+                    <k2>0.0</k2>
+                    <k3>0.0</k3>
+                    <p1>0.0</p1>
+                    <p2>0.0</p2>
+                    <center>0.5 0.5</center>
+                </distortion>
+                <clip>
+                    <near>0.02</near>
+                    <far>30</far>
+                </clip>
+            </camera>
+            <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+                <alwaysOn>true</alwaysOn>
+                <updateRate>0.0</updateRate>
+                <cameraName>rgb_camera_sensor</cameraName>
+                <imageTopicName>/rgb_camera_sensor/image_raw</imageTopicName>
+                <cameraInfoTopicName>/rgb_camera_sensor/camera_info</cameraInfoTopicName>
+                <frameName>camera_link_optical</frameName>
+                <hackBaseline>0.0</hackBaseline>
+                <distortionK1>0.0</distortionK1>
+                <distortionK2>0.0</distortionK2>
+                <distortionK3>0.0</distortionK3>
+                <distortionT1>0.0</distortionT1>
+                <distortionT2>0.0</distortionT2>
+                <CxPrime>0</CxPrime>
+                <Cx>0.0</Cx>
+                <Cy>0.0</Cy>
+                <focalLength>0.0</focalLength>
+            </plugin>
+        </sensor>
+    </gazebo>
+
+    <joint name="rgb_camera_to_base_link" type="fixed">
+        <parent link="base_link" />
+        <child link="rgb_camera " />
+        <origin rpy="0 0 0" xyz="0 0 0" />
+    </joint>
+
+
     <link name="base_plate">
+        <xacro:default_inertial mass="0.1" />
         <visual>
             <origin rpy="0 0 0" xyz="-0.39 -0.39 -0.56" />
             <geometry>
                 <mesh filename="package://arduinobot_description/meshes/base_plate.STL"
                     scale="0.01 0.01 0.01" />
             </geometry>
+            <material name="red"/>
         </visual>
+        <collision>
+            <origin rpy="0 0 0" xyz="-0.39 -0.39 -0.56" />
+            <geometry>
+                <mesh filename="package://arduinobot_description/meshes/base_plate.STL"
+                    scale="0.01 0.01 0.01" />
+            </geometry>
+        </collision>
     </link>
 
     <joint name="joint_1" type="revolute">
@@ -42,13 +143,22 @@
     </joint>
 
     <link name="forward_drive_arm">
+        <xacro:default_inertial mass="0.1" />
         <visual>
             <origin rpy="0 -${PI/2} ${PI/2}" xyz="0.19 0.06 -0.08" />
             <geometry>
                 <mesh filename="package://arduinobot_description/meshes/forward_drive_arm.STL"
                     scale="0.01 0.01 0.01" />
             </geometry>
+            <material name="orange"/>
         </visual>
+        <collission>
+            <origin rpy="0 -${PI/2} ${PI/2}" xyz="0.19 0.06 -0.08" />
+            <geometry>
+                <mesh filename="package://arduinobot_description/meshes/forward_drive_arm.STL"
+                    scale="0.01 0.01 0.01" />
+            </geometry>
+        </collission>
     </link>
 
     <joint name="joint_2" type="revolute">
@@ -60,13 +170,22 @@
     </joint>
 
     <link name="horizontal_arm">
+        <xacro:default_inertial mass="0.1" />
         <visual>
             <origin rpy="${PI/2} 0 ${PI/2}" xyz="-0.03 -0.4 -0.06" />
             <geometry>
                 <mesh filename="package://arduinobot_description/meshes/horizontal_arm.STL"
                     scale="0.01 0.01 0.01" />
             </geometry>
+            <material name="green"/>
         </visual>
+        <collision>
+            <origin rpy="${PI/2} 0 ${PI/2}" xyz="-0.03 -0.4 -0.06" />
+            <geometry>
+                <mesh filename="package://arduinobot_description/meshes/horizontal_arm.STL"
+                    scale="0.01 0.01 0.01" />
+            </geometry>
+        </collision>
     </link>
 
     <joint name="joint_3" type="revolute">
@@ -78,13 +197,22 @@
     </joint>
 
     <link name="claw_support">
+        <xacro:default_inertial mass="0.05" />
         <visual>
             <origin rpy="0 0 ${PI/2}" xyz="0.13 -0.05 -0.15" />
             <geometry>
                 <mesh filename="package://arduinobot_description/meshes/claw_support.STL"
                     scale="0.01 0.01 0.01" />
             </geometry>
+            <material name="red"/>
         </visual>
+        <collision>
+            <origin rpy="0 0 ${PI/2}" xyz="0.13 -0.05 -0.15" />
+            <geometry>
+                <mesh filename="package://arduinobot_description/meshes/claw_support.STL"
+                    scale="0.01 0.01 0.01" />
+            </geometry>
+        </collision>
     </link>
 
     <joint name="horizontal_arm_to_claw_support" type="fixed">
@@ -93,24 +221,67 @@
         <origin rpy="0 0 0" xyz="0 0.82 0" />
     </joint>
 
+    <link name="pi_camera ">
+        <xacro:default_inertial mass="0.01" />
+        <visual>
+            <origin rpy="${PI/3} ${PI} ${PI}" xyz="-0.12 0.26 0.31" />
+            <geometry>
+                <mesh filename="package://arduinobot_description/meshes/pi_camera.STL"
+                    scale="0.01 0.01 0.01" />
+            </geometry>
+            <material name="blue"/>
+        </visual>
+        <collision>
+            <origin rpy="${PI/3} ${PI} ${PI}" xyz="-0.12 0.26 0.31" />
+            <geometry>
+                <mesh filename="package://arduinobot_description/meshes/pi_camera.STL"
+                    scale="0.01 0.01 0.01" />
+            </geometry>
+        </collision>
+    </link>
+
+    <joint name="claw_support_to_pi_camera" type="fixed">
+        <parent link="claw_support" />
+        <child link="pi_camera " />
+        <origin rpy="0 0 0" xyz="0 0 0" />
+    </joint>
+
     <link name="gripper_right">
+        <xacro:default_inertial mass="0.01" />
         <visual>
             <origin rpy="0 0 -${PI/2}" xyz="-0.09 0.48 -0.08" />
             <geometry>
                 <mesh filename="package://arduinobot_description/meshes/right_finger.STL"
                     scale="0.01 0.01 0.01" />
             </geometry>
+            <material name="yellow"/>
         </visual>
+        <collision>
+            <origin rpy="0 0 -${PI/2}" xyz="-0.09 0.48 -0.08" />
+            <geometry>
+                <mesh filename="package://arduinobot_description/meshes/right_finger.STL"
+                    scale="0.01 0.01 0.01" />
+            </geometry>
+        </collision>
     </link>
 
     <link name="gripper_left">
+        <xacro:default_inertial mass="0.01" />
         <visual>
             <origin rpy="0 0 -${PI/2}" xyz="-0.03 0.48 -0.08" />
             <geometry>
                 <mesh filename="package://arduinobot_description/meshes/left_finger.STL"
                     scale="0.01 0.01 0.01" />
             </geometry>
+            <material name="yellow"/>
         </visual>
+        <collision>
+            <origin rpy="0 0 -${PI/2}" xyz="-0.03 0.48 -0.08" />
+            <geometry>
+                <mesh filename="package://arduinobot_description/meshes/left_finger.STL"
+                    scale="0.01 0.01 0.01" />
+            </geometry>
+        </collision>
     </link>
 
     <joint name="joint_4" type="revolute">
@@ -131,4 +302,40 @@
     </joint>
 
 
+
+  <material name="black">
+    <color rgba="0.0 0.0 0.0 1.0"/>
+  </material>
+
+  <material name="blue">
+    <color rgba="0.0 0.0 0.8 1.0"/>
+  </material>
+
+  <material name="green">
+    <color rgba="0.0 0.8 0.0 1.0"/>
+  </material>
+
+  <material name="grey">
+    <color rgba="0.2 0.2 0.2 1.0"/>
+  </material>
+
+  <material name="orange">
+    <color rgba="${255/255} ${108/255} ${10/255} 1.0"/>
+  </material>
+
+  <material name="brown">
+    <color rgba="${222/255} ${207/255} ${195/255} 1.0"/>
+  </material>
+
+  <material name="red">
+    <color rgba="0.8 0.0 0.0 1.0"/>
+  </material>
+
+  <material name="white">
+    <color rgba="1.0 1.0 1.0 1.0"/>
+  </material>
+
+    <material name="yellow">
+    <color rgba="1.0 1.0 0.0 1.0"/>
+  </material>
 </robot>
