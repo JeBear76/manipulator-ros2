@@ -9,6 +9,8 @@ from pathlib import Path
 from ament_index_python.packages import get_package_share_directory
 
 def generate_launch_description():
+    ros_distro = os.environ["ROS_DISTRO"]
+    is_ignition = "True" if ros_distro == "humble" else "False"
     arduinobot_description_dir = get_package_share_directory('arduinobot_description')
     model_arg = DeclareLaunchArgument(
         name="model",
@@ -16,7 +18,13 @@ def generate_launch_description():
         description='Absolute Path to the URDF file'
         )
     
-    robot_description = ParameterValue(Command(["xacro ", LaunchConfiguration("model")]))
+    robot_description = ParameterValue(Command([
+        "xacro ", 
+        LaunchConfiguration("model"),
+        " is_ignition:=",
+        is_ignition
+        ]), 
+        value_type=str)
 
     robot_state_publisher= Node(
         package='robot_state_publisher',
@@ -34,7 +42,6 @@ def generate_launch_description():
             ]
     )
 
-    ros_distro = os.environ["ROS_DISTRO"]
     physics_engine = "" if ros_distro == "humble" else "--physics-engine gz-physics-bullet-featherstone-plugin "
 
     gazebo = IncludeLaunchDescription(

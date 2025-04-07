@@ -1,6 +1,12 @@
 <?xml version="1.0"?>
 
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="arduinobot">
+    <xacro:arg name="is_ignition" default="false" />
+
+    <xacro:include filename="$(find arduinobot_description)/urdf/arduinobot_colors.xacro" />
+    <xacro:include filename="$(find arduinobot_description)/urdf/arduinobot_gazebo.xacro" />
+    <xacro:include filename="$(find arduinobot_description)/urdf/arduinobot_ros2_control.xacro" />
+
     <xacro:property name="PI" value="3.14159" />
     <xacro:property name="effort" value="30.0" />
     <xacro:property name="velocity" value="10.0" />
@@ -24,7 +30,7 @@
                 <mesh filename="package://arduinobot_description/meshes/basement.STL"
                     scale="0.01 0.01 0.01" />
             </geometry>
-            <material name="red"/>
+            <material name="red" />
         </visual>
         <collision>
             <origin rpy="0 0 0" xyz="-0.5 -0.5 0" />
@@ -32,7 +38,7 @@
                 <mesh filename="package://arduinobot_description/meshes/basement.STL"
                     scale="0.01 0.01 0.01" />
             </geometry>
-        </collision>        
+        </collision>
     </link>
 
     <joint name="virtual_joint" type="fixed">
@@ -49,7 +55,7 @@
                 <mesh filename="package://arduinobot_description/meshes/pi_camera.STL"
                     scale="0.01 0.01 0.01" />
             </geometry>
-            <material name="blue"/>
+            <material name="blue" />
         </visual>
         <collision>
             <origin rpy="${2*PI/3} ${PI} ${PI}" xyz="-0.127 0.35 0.3" />
@@ -59,7 +65,7 @@
             </geometry>
         </collision>
     </link>
-    
+
     <gazebo reference="rgb_camera">
         <sensor type="camera" name="rgb_camera_sensor">
             <update_rate>30.0</update_rate>
@@ -123,7 +129,7 @@
                 <mesh filename="package://arduinobot_description/meshes/base_plate.STL"
                     scale="0.01 0.01 0.01" />
             </geometry>
-            <material name="red"/>
+            <material name="red" />
         </visual>
         <collision>
             <origin rpy="0 0 0" xyz="-0.39 -0.39 -0.56" />
@@ -150,7 +156,7 @@
                 <mesh filename="package://arduinobot_description/meshes/forward_drive_arm.STL"
                     scale="0.01 0.01 0.01" />
             </geometry>
-            <material name="orange"/>
+            <material name="orange" />
         </visual>
         <collission>
             <origin rpy="0 -${PI/2} ${PI/2}" xyz="0.19 0.06 -0.08" />
@@ -177,7 +183,7 @@
                 <mesh filename="package://arduinobot_description/meshes/horizontal_arm.STL"
                     scale="0.01 0.01 0.01" />
             </geometry>
-            <material name="green"/>
+            <material name="green" />
         </visual>
         <collision>
             <origin rpy="${PI/2} 0 ${PI/2}" xyz="-0.03 -0.4 -0.06" />
@@ -204,7 +210,7 @@
                 <mesh filename="package://arduinobot_description/meshes/claw_support.STL"
                     scale="0.01 0.01 0.01" />
             </geometry>
-            <material name="red"/>
+            <material name="red" />
         </visual>
         <collision>
             <origin rpy="0 0 ${PI/2}" xyz="0.13 -0.05 -0.15" />
@@ -229,7 +235,7 @@
                 <mesh filename="package://arduinobot_description/meshes/pi_camera.STL"
                     scale="0.01 0.01 0.01" />
             </geometry>
-            <material name="blue"/>
+            <material name="blue" />
         </visual>
         <collision>
             <origin rpy="${PI/3} ${PI} ${PI}" xyz="-0.12 0.26 0.31" />
@@ -254,7 +260,7 @@
                 <mesh filename="package://arduinobot_description/meshes/right_finger.STL"
                     scale="0.01 0.01 0.01" />
             </geometry>
-            <material name="yellow"/>
+            <material name="yellow" />
         </visual>
         <collision>
             <origin rpy="0 0 -${PI/2}" xyz="-0.09 0.48 -0.08" />
@@ -273,7 +279,7 @@
                 <mesh filename="package://arduinobot_description/meshes/left_finger.STL"
                     scale="0.01 0.01 0.01" />
             </geometry>
-            <material name="yellow"/>
+            <material name="yellow" />
         </visual>
         <collision>
             <origin rpy="0 0 -${PI/2}" xyz="-0.03 0.48 -0.08" />
@@ -302,40 +308,4 @@
     </joint>
 
 
-
-  <material name="black">
-    <color rgba="0.0 0.0 0.0 1.0"/>
-  </material>
-
-  <material name="blue">
-    <color rgba="0.0 0.0 0.8 1.0"/>
-  </material>
-
-  <material name="green">
-    <color rgba="0.0 0.8 0.0 1.0"/>
-  </material>
-
-  <material name="grey">
-    <color rgba="0.2 0.2 0.2 1.0"/>
-  </material>
-
-  <material name="orange">
-    <color rgba="${255/255} ${108/255} ${10/255} 1.0"/>
-  </material>
-
-  <material name="brown">
-    <color rgba="${222/255} ${207/255} ${195/255} 1.0"/>
-  </material>
-
-  <material name="red">
-    <color rgba="0.8 0.0 0.0 1.0"/>
-  </material>
-
-  <material name="white">
-    <color rgba="1.0 1.0 1.0 1.0"/>
-  </material>
-
-    <material name="yellow">
-    <color rgba="1.0 1.0 0.0 1.0"/>
-  </material>
 </robot>

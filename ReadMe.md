@@ -50,6 +50,15 @@ It includes examples of declaring parameters, setting default values, and handli
 
 ### arduinobot_description
 This package contains the Universal Robot Definition Format file of the robot and the STL files
+- arduinobot.urdf.xacro
+    The robot model
+- arduinobot_colors.xacro
+    The robot colors for gazebo
+- arduinobot_gazebo.xacro 
+    The gazebo configurations
+- arduinobot_ros2_control.xacro
+    The controller setup
+
 ```
 ros2 launch urdf_tutorial display.launch.py model:=/home/jebear/arduinobot_ws/src/arduinobot_description/urdf/arduinobot.urdf.xacro
 ```
@@ -58,3 +67,5 @@ ros2 launch urdf_tutorial display.launch.py model:=/home/jebear/arduinobot_ws/sr
 ros2 launch arduinobot_description display.launch.py
 ```
 
+### arduinobot_controller
+The package that contains the controller configurations for the robot
