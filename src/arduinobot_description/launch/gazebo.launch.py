@@ -31,7 +31,7 @@ def generate_launch_description():
         executable='robot_state_publisher',
         parameters=[
             {'robot_description': robot_description},
-            {'use_sim_time':True}
+            {'use_sim_time': True}
             ]
     )
 
@@ -53,9 +53,9 @@ def generate_launch_description():
                 "/gz_sim.launch.py"
             ]          
         ),
-        launch_arguments=[
-            ("gz_args", [" -v 4 -r empty.sdf ", physics_engine, "--render-engine ogre "])
-        ]
+        launch_arguments={
+            "gz_args": [" -v4 -r empty.sdf ", physics_engine], 'on_exit_shutdown': 'true'
+        }.items()
     )
 
     gz_spawn_entity = Node(
