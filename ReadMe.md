@@ -3,6 +3,20 @@
 ## useful URLs
 [Install Gazebo on WSL](https://aleksandarhaber.com/how-to-install-gazebo-harmonic-in-windows-by-using-wsl-and-ubuntu-24-04-and-how-to-run-mobile-robot-simulation/)  
 [Share USB device with WSL from Windows](https://learn.microsoft.com/en-us/windows/wsl/connect-usb)
+
+## additional packages
+### For MOVEIT2
+```
+sudo apt install ros-jazzy-rmw-cyclonedds-cpp
+```
+add `export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp` to ~/.bashrc  
+
+### For Angle Conversion service in utils
+```
+sudo apt install ros-jazzy-tf-transformations
+sudo apt install python3-transforms3d
+```
+
 ## quick notes
 
 ### Creating the environment
@@ -37,28 +51,6 @@ ros2 topic hz <name of topic>
 ros2 topic pub <name of topic> <message type> <body>
 ```
 
-## Packages Description
-
-### arduinobot_XX_examples
-Some basic tutorial and references packages in Python and C++
-#### simple_publisher / simple_subscriber
-This script provides a basic example of implementing a publisher in a publish-subscribe messaging system. It demonstrates how to send messages to a specific topic, enabling real-time communication with subscribers.
-
-#### simple_parameter
-This script demonstrates how to use ROS 2 parameters.  
-It includes examples of declaring parameters, setting default values, and handling parameter changes dynamically through a callback function. 
-
-### arduinobot_description
-This package contains the Universal Robot Definition Format file of the robot and the STL files
-- arduinobot.urdf.xacro  
-    The robot model  
-- arduinobot_colors.xacro  
-    The robot colors for gazebo  
-- arduinobot_gazebo.xacro  
-    The gazebo configurations  
-- arduinobot_ros2_control.xacro  
-    The controller setup  
-  
 ```
 ros2 launch urdf_tutorial display.launch.py model:=/home/jebear/arduinobot_ws/src/arduinobot_description/urdf/arduinobot.urdf.xacro
 ```
