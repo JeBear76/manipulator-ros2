@@ -8,6 +8,7 @@
 ### For MOVEIT2
 ```
 sudo apt install ros-jazzy-rmw-cyclonedds-cpp
+sudo apt-get install ros-jazzy-moveit* ros-jazzy-ompl*
 ```
 add `export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp` to ~/.bashrc  
 
