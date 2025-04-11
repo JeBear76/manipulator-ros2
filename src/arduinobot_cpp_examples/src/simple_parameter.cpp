@@ -3,7 +3,6 @@
 #include <rcl_interfaces/msg/set_parameters_result.hpp>
 #include <memory>
 
-
 using std::placeholders::_1;
 
 class SimpleParameter : public rclcpp::Node

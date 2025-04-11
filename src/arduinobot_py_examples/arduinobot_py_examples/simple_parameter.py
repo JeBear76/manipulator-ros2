@@ -22,8 +22,8 @@ class SimpleParameter(Node):
         return result
 
 def main():
-    simpleParameter = SimpleParameter()
     rclpy.init()
+    simpleParameter = SimpleParameter()
     rclpy.spin(simpleParameter)
     simpleParameter.destroy_node()
     rclpy.shutdown()

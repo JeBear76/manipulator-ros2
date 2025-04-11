@@ -10,6 +10,8 @@ find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(rcl_interfaces REQUIRED)
 find_package(arduinobot_msgs REQUIRED)
+find_package(rclcpp_action REQUIRED)
+find_package(rclcpp_components REQUIRED)
 
 add_executable(simple_publisher src/simple_publisher.cpp)
 ament_target_dependencies(
@@ -41,6 +43,23 @@ ament_target_dependencies(
   rclcpp
   arduinobot_msgs)
 
+  add_library(simple_action_server SHARED src/simple_action_server.cpp)
+  target_include_directories(simple_action_server PRIVATE
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<INSTALL_INTERFACE:include>)
+  target_compile_definitions(simple_action_server
+    PRIVATE "SIMPLE_ACTION_SERVER_CPP_BUILDING_DLL")
+  ament_target_dependencies(simple_action_server
+    "arduinobot_msgs"
+    "rclcpp"
+    "rclcpp_action"
+    "rclcpp_components")
+  rclcpp_components_register_node(simple_action_server 
+    PLUGIN "arduinobot_cpp_examples::SimpleActionServer" 
+    EXECUTABLE simple_action_server_node
+  )
+  
+
 install(TARGETS
   simple_publisher
   simple_subscriber
@@ -48,6 +67,13 @@ install(TARGETS
   simple_service_server
   simple_service_client
   DESTINATION lib/${PROJECT_NAME}
+)
+
+install(TARGETS
+  simple_action_server
+  ARCHIVE DESTINATION lib
+  LIBRARY DESTINATION lib
+  RUNTIME DESTINATION bin
 )
 
 if(BUILD_TESTING)
