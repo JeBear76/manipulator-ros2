@@ -11,11 +11,30 @@ find_package(ament_cmake_python REQUIRED)
 find_package(rclpy REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
+find_package(PkgConfig REQUIRED)
+
+pkg_check_modules(SERIAL libserial)
 
 ament_python_install_package(${PROJECT_NAME})
 
+add_executable(simple_serial_transmitter src/simple_serial_transmitter.cpp)
+ament_target_dependencies(
+  simple_serial_transmitter
+  rclcpp
+  std_msgs)
+target_include_directories(simple_serial_transmitter PUBLIC ${SERIAL_INCLUDE_DIRS})
+target_link_libraries(simple_serial_transmitter "${SERIAL_LDFLAGS}")
+
 install(PROGRAMS
   ${PROJECT_NAME}/simple_serial_transmitter.py
+  DESTINATION lib/${PROJECT_NAME}
+)
+
+install(TARGETS
+  simple_serial_transmitter
+  ARCHIVE DESTINATION lib
+  LIBRARY DESTINATION lib
+  RUNTIME DESTINATION bin
   DESTINATION lib/${PROJECT_NAME}
 )
 
