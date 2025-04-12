@@ -62,3 +62,18 @@ ros2 launch arduinobot_description display.launch.py
 
 ### arduinobot_controller
 The package that contains the controller configurations for the robot
+
+### WSL USB Commands
+Powershell
+```
+usbipd list
+usbipd bind --busid <busid>
+usbipd attach --wsl --busid <busid>
+
+usbipd detach --busid <busid>
+```
+Bash
+```
+lsusb
+udevadm info --name=/dev/ttyACM0 --attribute-walk
+```
