@@ -32,7 +32,7 @@ def move_robot():
     arm_plan = arduinobot_arm.plan()
     gripper_plan = arduinobot_gripper.plan()
 
-    if arm_plan and gripper_plan:
+    if arm_plan:
         arduinobot.execute(arm_plan.trajectory, controllers=[])
     else:
         get_logger("rclpy").error("Unable to plan arm movement")
