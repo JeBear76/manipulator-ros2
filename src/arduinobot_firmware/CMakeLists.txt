@@ -25,13 +25,23 @@ ament_target_dependencies(
 target_include_directories(simple_serial_transmitter PUBLIC ${SERIAL_INCLUDE_DIRS})
 target_link_libraries(simple_serial_transmitter "${SERIAL_LDFLAGS}")
 
+add_executable(simple_serial_receiver src/simple_serial_receiver.cpp)
+ament_target_dependencies(
+  simple_serial_receiver 
+  rclcpp
+  std_msgs)
+target_include_directories(simple_serial_receiver PUBLIC "${SERIAL_INCLUDE_DIRS}")
+target_link_libraries(simple_serial_receiver "${SERIAL_LDFLAGS}")
+
 install(PROGRAMS
   ${PROJECT_NAME}/simple_serial_transmitter.py
+  ${PROJECT_NAME}/simple_serial_receiver.py
   DESTINATION lib/${PROJECT_NAME}
 )
 
 install(TARGETS
   simple_serial_transmitter
+  simple_serial_receiver
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
   RUNTIME DESTINATION bin

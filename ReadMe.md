@@ -60,9 +60,6 @@ ros2 launch urdf_tutorial display.launch.py model:=/home/jebear/arduinobot_ws/sr
 ros2 launch arduinobot_description display.launch.py
 ```
 
-### arduinobot_controller
-The package that contains the controller configurations for the robot
-
 ### WSL USB Commands
 Powershell
 ```
@@ -76,4 +73,11 @@ Bash
 ```
 lsusb
 udevadm info --name=/dev/ttyACM0 --attribute-walk
+```
+
+### Life cycle nodes
+```
+ros2 lifecycle nodes
+ros2 lifecycle list /simple_lifecycle_node
+ros2 lifecycle set /simple_lifecycle_node <state>
 ```
