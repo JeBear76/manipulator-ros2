@@ -15,17 +15,15 @@ find_package(PkgConfig REQUIRED)
 
 pkg_check_modules(SERIAL libserial)
 
-add_library(${PROJECT_NAME}
+add_library(${PROJECT_NAME} SHARED 
   src/arduinobot_interface.cpp
 )
-target_include_directories(${PROJECT_NAME} PRIVATE
-include
-"${SERIAL_INCLUDE_DIRS}"
+target_include_directories(${PROJECT_NAME} PRIVATE 
+  include
+  "${SERIAL_INCLUDE_DIRS}"
 )
-target_link_libraries(${PROJECT_NAME} 
-include
-"${SERIAL_LDFLAGS}"
-)
+target_link_libraries(${PROJECT_NAME}
+ "${SERIAL_LDFLAGS}")
 ament_target_dependencies(${PROJECT_NAME}
   hardware_interface
   pluginlib
@@ -64,12 +62,5 @@ ament_export_dependencies(
   rclcpp
   rclcpp_lifecycle
 )
-
-if(BUILD_TESTING)
-  find_package(ament_lint_auto REQUIRED)
-  set(ament_cmake_copyright_FOUND TRUE)
-  set(ament_cmake_cpplint_FOUND TRUE)
-  ament_lint_auto_find_test_dependencies()
-endif()
 
 ament_package()

@@ -28,7 +28,7 @@
             <!-- Real Robot-->
             <hardware>
                 <plugin>arduinobot_controller/ArduinobotInterface</plugin>
-                <param name="port">$(arg port)</param>
+                <param name="port">/dev/ttyACM0</param>
             </hardware>
         </xacro:unless>
 
