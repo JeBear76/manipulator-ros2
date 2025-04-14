@@ -145,7 +145,7 @@ namespace arduinobot_controller
         msg.append(std::to_string(shoulder));
         msg.append(",");
 
-        int elbow = static_cast<int>(((-position_commands_.at(2) + (M_PI / 2)) * 180) / M_PI);
+        int elbow = static_cast<int>(((position_commands_.at(2) + (M_PI / 2)) * 180) / M_PI);
         msg.append("e");
         msg.append(compensateZeros(elbow));
         msg.append(std::to_string(elbow));
