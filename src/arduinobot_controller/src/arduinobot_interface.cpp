@@ -139,19 +139,19 @@ namespace arduinobot_controller
         msg.append(std::to_string(base));
         msg.append(",");
 
-        int shoulder = static_cast<int>(((position_commands_.at(1) + (M_PI / 2)) * 180) / M_PI);
+        int shoulder = static_cast<int>(((-position_commands_.at(1) + (M_PI / 2)) * 180) / M_PI);
         msg.append("s");
         msg.append(compensateZeros(shoulder));
         msg.append(std::to_string(shoulder));
         msg.append(",");
 
-        int elbow = static_cast<int>(((position_commands_.at(2) + (M_PI / 2)) * 180) / M_PI);
+        int elbow = static_cast<int>(((-position_commands_.at(2) + (M_PI / 2)) * 180) / M_PI);
         msg.append("e");
         msg.append(compensateZeros(elbow));
         msg.append(std::to_string(elbow));
         msg.append(",");
         
-        int gripper = static_cast<int>(((position_commands_.at(3) + (M_PI / 2)) * 180) / M_PI);
+        int gripper = static_cast<int>((-position_commands_.at(3) * 180) / M_PI);
         msg.append("g");
         msg.append(compensateZeros(gripper));
         msg.append(std::to_string(gripper));
