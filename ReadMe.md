@@ -4,11 +4,34 @@
 [Install Gazebo on WSL](https://aleksandarhaber.com/how-to-install-gazebo-harmonic-in-windows-by-using-wsl-and-ubuntu-24-04-and-how-to-run-mobile-robot-simulation/)  
 [Share USB device with WSL from Windows](https://learn.microsoft.com/en-us/windows/wsl/connect-usb)
 
-## additional packages
+## Packages
+### Setup 
+```
+sudo apt-get update && sudo apt-get upgrade -y
+```
+```
+sudo apt-get install -y ros-jazzy-ros2-control
+sudo apt-get install -y ros-jazzy-ros2-controllers
+sudo apt-get install -y ros-jazzy-xacro
+sudo apt-get install -y ros-jazzy-ros-gz-*
+sudo apt-get install -y ros-jazzy-*-ros2-control
+sudo apt-get install -y ros-jazzy-joint-state-publisher-gui
+sudo apt-get install -y ros-jazzy-tf-transformations
+sudo apt-get install -y ros-jazzy-moveit*
+```
+### Alexa interface
+```
+sudo apt-get -y install python3-pip
+sudo apt-get -y install python3-transforms3d
+sudo apt-get -y install python3-flask
+pip3 install pyserial --break-system-packages
+pip3 install flask-ask-sdk --break-system-packages
+pip3 install ask-sdk --break-system-packages
+```
 ### For MOVEIT2
 ```
-sudo apt install ros-jazzy-rmw-cyclonedds-cpp
-sudo apt-get install ros-jazzy-moveit* ros-jazzy-ompl*
+sudo apt-get install -y ros-jazzy-rmw-cyclonedds-cpp
+sudo apt-get install -y ros-jazzy-moveit* ros-jazzy-ompl*
 ```
 add `export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp` to ~/.bashrc  
 
