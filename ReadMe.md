@@ -2,7 +2,8 @@
 
 ## useful URLs
 [Install Gazebo on WSL](https://aleksandarhaber.com/how-to-install-gazebo-harmonic-in-windows-by-using-wsl-and-ubuntu-24-04-and-how-to-run-mobile-robot-simulation/)  
-[Share USB device with WSL from Windows](https://learn.microsoft.com/en-us/windows/wsl/connect-usb)
+[Share USB device with WSL from Windows](https://learn.microsoft.com/en-us/windows/wsl/connect-usb)  
+[CycloneDDS help](https://husarnet.com/docs/ros2/custom-cyclonedds-xml)  
 
 ## Packages
 ### Setup 
@@ -18,6 +19,7 @@ sudo apt-get install -y ros-jazzy-*-ros2-control
 sudo apt-get install -y ros-jazzy-joint-state-publisher-gui
 sudo apt-get install -y ros-jazzy-tf-transformations
 sudo apt-get install -y ros-jazzy-moveit*
+sudo apt-get install -y libserial-dev
 ```
 ### Alexa interface
 ```
