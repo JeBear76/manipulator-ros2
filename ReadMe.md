@@ -39,8 +39,8 @@ add `export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp` to ~/.bashrc
 
 ### For Angle Conversion service in utils
 ```
-sudo apt install ros-jazzy-tf-transformations
-sudo apt install python3-transforms3d
+sudo apt install -y ros-jazzy-tf-transformations
+sudo apt install -y python3-transforms3d
 ```
 
 ## quick notes
