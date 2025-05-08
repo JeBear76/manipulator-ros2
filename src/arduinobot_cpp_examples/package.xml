@@ -8,13 +8,13 @@
   <license>TODO: License declaration</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
+  <build_depend>arduinotbot_msgs</build_depend>
 
   <depend>rclcpp</depend>
   <depend>rclcpp_action</depend>
   <depend>std_msgs</depend>
   <depend>rcl_interfaces</depend>
   <depend>rclcpp_components</depend>
-  <depend>arduinotbot_msgs</depend>
   <depend>moveit_ros_planning_interface</depend>
   <depend>rclcpp_lifecycle</depend>
 
